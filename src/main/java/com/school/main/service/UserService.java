@@ -8,6 +8,7 @@ package com.school.main.service;
  *
  * @author panha
  */
+import com.school.main.constant.RoleConstant;
 import com.school.main.dao.UserRepository;
 import com.school.main.exception.ResourceAlreadyExistsException;
 import com.school.main.model.User;
@@ -32,6 +33,7 @@ public class UserService implements UserDetailsService {
             throw new ResourceAlreadyExistsException("User", user.getEmail());
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(RoleConstant.STUDENT.toString());
         return userRepo.save(user);
     }
 

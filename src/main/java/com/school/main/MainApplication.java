@@ -1,5 +1,6 @@
 package com.school.main;
 
+import com.school.main.constant.RoleConstant;
 import com.school.main.model.User;
 import com.school.main.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -22,11 +23,11 @@ public class MainApplication {
         return args -> {
             // Check if the user already exists
             if (!userService.isEmailExist("admin@school.com")) {
-                userService.save(new User("Admin", "Sekolah", "admin@school.com", "123456", "ADMIN"));
+                userService.save(new User("Admin", "Sekolah", "admin@school.com", "123456", RoleConstant.ADMIN.toString()));
             }
 
             if (!userService.isEmailExist("student@school.com")) {
-                userService.save(new User("Student", "Test", "student@school.com", "123456", "STUDENT"));
+                userService.save(new User("Student", "Test", "student@school.com", "123456", RoleConstant.STUDENT.toString()));
             }
         };
     }

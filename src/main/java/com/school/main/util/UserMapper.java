@@ -26,7 +26,7 @@ public class UserMapper {
     }
 
     public UserResponse toResponse(User user) {
-        return mapper.map(user, UserResponse.class);
+            return mapper.map(user, UserResponse.class);
     }
 
 }

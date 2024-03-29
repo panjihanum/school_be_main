@@ -1,5 +1,7 @@
 package com.school.main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.school.main.constant.RoleConstant;
 import jakarta.persistence.*;
 import java.util.Collection;
 import java.util.Date;
@@ -26,6 +28,7 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String username;
 
+    @JsonIgnore
     private String password;
     private String role;
     private String firstName;
@@ -49,7 +52,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.equals("STUDENT")));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.equals(RoleConstant.STUDENT.toString())));
     }
 
     @Override

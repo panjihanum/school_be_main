@@ -7,6 +7,7 @@ package com.school.main.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 @NoArgsConstructor
@@ -14,5 +15,5 @@ import lombok.NoArgsConstructor;
 public class AuthenticationResponse {
 
     private String token;
-
+    private UserDetails user;
 }

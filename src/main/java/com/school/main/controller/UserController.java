@@ -13,9 +13,9 @@ import com.school.main.service.AuthenticationService;
 import com.school.main.service.UserService;
 import com.school.main.util.UserMapper;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,8 +51,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody @Valid AuthenticationRequest request) {
-        var token = authenticationService.authenticate(request.getEmail(), request.getPassword());
-        return ResponseEntity.ok(new AuthenticationResponse(token));
+        return ResponseEntity.ok(authenticationService.authenticate(request.getEmail(), request.getPassword()));
     }
 
 }

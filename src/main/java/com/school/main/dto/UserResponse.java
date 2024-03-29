@@ -8,17 +8,18 @@ package com.school.main.dto;
  *
  * @author panha
  */
+import java.util.Date;
+import java.util.UUID;
 import lombok.Data;
 
 @Data
 public class UserResponse {
 
-    private Integer id;
-
-    private String name;
-
+    private UUID id;
+    private String firstName;
+    private String lastName;
+    private Date birthDate;
     private String email;
-
     private String role;
 
 }

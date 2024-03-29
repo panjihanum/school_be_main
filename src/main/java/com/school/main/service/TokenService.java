@@ -36,19 +36,19 @@ public class TokenService {
     }
 
     public String getSubjectFrom(String token) {
-        Algorithm algorithm = Algorithm.HMAC256(secret.getBytes());
+        Algorithm algorithm = Algorithm.HMAC384(secret.getBytes());
         JWTVerifier verifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = verifier.verify(token);
         return decodedJWT.getSubject();
     }
 
     public String generateToken(User user) {
-        Algorithm algorithm = Algorithm.HMAC256(secret.getBytes());
-        Instant expiration = generateExpirationTimeIn(10);
+        Algorithm algorithm = Algorithm.HMAC384(secret.getBytes());
+        Instant expiration = generateExpirationTimeIn(6000);
         String token = JWT.create()
-                .withSubject(user.getUsername())
+                .withSubject(user.getEmail())
                 .withExpiresAt(expiration)
-                //                .withIssuer("SCHOOL-API")
+                .withIssuer("SCHOOL-API")
                 .withClaim("roles", user.getRole())
                 .sign(algorithm);
         return token;
