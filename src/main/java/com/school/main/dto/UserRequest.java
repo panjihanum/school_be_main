@@ -17,6 +17,9 @@ import lombok.Data;
 public class UserRequest {
 
     @NotEmpty(message = "{required.field}")
+    private String username;
+
+    @NotEmpty(message = "{required.field}")
     private String firstName;
     private String lastName;
     private Date birthdate;

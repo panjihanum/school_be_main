@@ -33,7 +33,6 @@ public class UserService implements UserDetailsService {
             throw new ResourceAlreadyExistsException("User", user.getEmail());
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(RoleConstant.STUDENT.toString());
         return userRepo.save(user);
     }
 
@@ -42,9 +41,14 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepo.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {
+        User user = userRepo.findByEmail(emailOrUsername)
+                .orElseGet(() -> {
+                    return userRepo.findByUsername(emailOrUsername)
+                            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                });
+
+        return user;
     }
 
     public boolean isEmailExist(String email) {

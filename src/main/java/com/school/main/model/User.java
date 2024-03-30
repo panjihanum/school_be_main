@@ -41,7 +41,8 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    public User(String firstName, String lastName, String email, String password, String role) {
+    public User(String firstName, String lastName, String username, String email, String password, String role) {
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -51,8 +52,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + this.role)
-        );
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.role));
     }
 
     @Override

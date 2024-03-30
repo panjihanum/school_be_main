@@ -23,11 +23,11 @@ public class MainApplication {
         return args -> {
             // Check if the user already exists
             if (!userService.isEmailExist("admin@school.com")) {
-                userService.save(new User("Admin", "Sekolah", "admin@school.com", "123456", RoleConstant.ADMIN.toString()));
+                userService.save(new User("Admin", "Sekolah", "admin", "admin@school.com", "123456", RoleConstant.ADMIN.toString()));
             }
 
             if (!userService.isEmailExist("student@school.com")) {
-                userService.save(new User("Student", "Test", "student@school.com", "123456", RoleConstant.STUDENT.toString()));
+                userService.save(new User("Student", "Test", "student", "student@school.com", "123456", RoleConstant.STUDENT.toString()));
             }
         };
     }
