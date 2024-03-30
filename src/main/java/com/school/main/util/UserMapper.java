@@ -4,6 +4,7 @@
  */
 package com.school.main.util;
 
+import com.school.main.dto.UserProfileResponse;
 import com.school.main.dto.UserRequest;
 import com.school.main.dto.UserResponse;
 import com.school.main.model.User;
@@ -26,7 +27,11 @@ public class UserMapper {
     }
 
     public UserResponse toResponse(User user) {
-            return mapper.map(user, UserResponse.class);
+        return mapper.map(user, UserResponse.class);
+    }
+
+    public UserProfileResponse toProfileResponse(User user) {
+        return mapper.map(user, UserProfileResponse.class);
     }
 
 }

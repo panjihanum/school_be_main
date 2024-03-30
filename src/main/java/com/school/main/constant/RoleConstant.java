@@ -10,7 +10,8 @@ package com.school.main.constant;
  */
 public enum RoleConstant {
     ADMIN("Administrator"),
-    STUDENT("Pelajar");
+    STUDENT("Pelajar"),
+    TEACHER("Guru");
 
     private final String displayName;
 

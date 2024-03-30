@@ -8,7 +8,6 @@ package com.school.main.service;
  *
  * @author panha
  */
-import com.school.main.constant.RoleConstant;
 import com.school.main.dao.UserRepository;
 import com.school.main.exception.ResourceAlreadyExistsException;
 import com.school.main.model.User;
@@ -20,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +39,14 @@ public class UserService implements UserDetailsService {
 
     public List<User> find() {
         return userRepo.findAll();
+    }
+
+    public Optional<User> findById(UUID userId) {
+        return userRepo.findById(userId);
+    }
+
+    public List<User> findByRole(String role) {
+        return userRepo.findByRole(role);
     }
 
     @Override

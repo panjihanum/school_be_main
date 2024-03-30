@@ -8,18 +8,15 @@ package com.school.main.dto;
  *
  * @author panha
  */
-import java.util.Date;
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
-public class UserResponse {
+public class UserProfileResponse {
 
-    private UUID id;
+    private String id;
     private String firstName;
     private String lastName;
-    private Date birthdate;
     private String email;
-    private String role;
 
 }
