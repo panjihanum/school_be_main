@@ -18,6 +18,7 @@ import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,7 @@ public class UserController {
     private final UserMapper mapper;
 
     @GetMapping
+    @RolesAllowed("ADMIN")
     public ResponseEntity<List<UserResponse>> getUsers() {
         List<User> users = userService.find();
         var resp = users.stream().map(mapper::toResponse).toList();
@@ -52,6 +54,13 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody @Valid AuthenticationRequest request) {
         return ResponseEntity.ok(authenticationService.authenticate(request.getEmail(), request.getPassword()));
+    }
+
+    @GetMapping("/user-detail")
+    public ResponseEntity<UserResponse> getUserDetail(Authentication authentication) {
+        var user = userService.loadUserByUsername((String) authentication.getPrincipal());
+        var resp = mapper.toResponse((User) user);
+        return ResponseEntity.ok(resp);
     }
 
 }
