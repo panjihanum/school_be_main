@@ -8,6 +8,7 @@ package com.school.main.exception;
  *
  * @author panha
  */
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +19,7 @@ public class ResourceNotFoundException extends RuntimeException {
     private String resourceName;
     private String resourceId;
 
-    public ResourceNotFoundException(String resourceName, Integer resourceId) {
+    public ResourceNotFoundException(String resourceName, UUID resourceId) {
         this(resourceName, resourceId.toString());
     }
 

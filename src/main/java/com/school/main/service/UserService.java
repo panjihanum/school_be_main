@@ -9,7 +9,9 @@ package com.school.main.service;
  * @author panha
  */
 import com.school.main.dao.UserRepository;
+import com.school.main.dto.UserRequest;
 import com.school.main.exception.ResourceAlreadyExistsException;
+import com.school.main.exception.ResourceNotFoundException;
 import com.school.main.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +37,23 @@ public class UserService implements UserDetailsService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
+    }
+
+    public User update(UserRequest newUser, UUID userId) {
+        User existingUser = userRepo.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", userId));
+
+        if (!newUser.getEmail().equals(existingUser.getEmail())
+                && userRepo.existsByEmail(newUser.getEmail())) {
+            throw new ResourceAlreadyExistsException("User", newUser.getEmail());
+        }
+
+        existingUser.setEmail(newUser.getEmail());
+        if (!newUser.getPassword().isBlank()) {
+            existingUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        }
+
+        return userRepo.save(existingUser);
     }
 
     public List<User> find() {

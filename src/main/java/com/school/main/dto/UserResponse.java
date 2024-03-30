@@ -21,5 +21,6 @@ public class UserResponse {
     private Date birthdate;
     private String email;
     private String role;
+    private String username;
 
 }
