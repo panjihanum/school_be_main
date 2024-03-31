@@ -430,7 +430,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Introduction to Programming\",\r\n    \"description\": \"This course covers the basics of programming using Java language.\",\r\n    \"effectiveDate\": \"2024-04-01T00:00:00\",\r\n    \"expiryDate\": \"2024-09-30T23:59:59\",\r\n    \"teacherId\": \"0e285125-3fa8-4732-85dd-c3c666c5ff61\" // Select Teacher ID First\r\n}",
+							"raw": "{\r\n    \"title\": \"Introduction to Programming\",\r\n    \"description\": \"This course covers the basics of programming using Java language.\",\r\n    \"effectiveDate\": \"2024-04-01T00:00:00\",\r\n    \"expiryDate\": \"2024-09-30T23:59:59\",\r\n    \"teacherId\": \"ce53f1e1-6390-4ae1-a570-d8872b992cac\" // Select Teacher ID First\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -549,11 +549,187 @@
 		},
 		{
 			"name": "Forum - Student",
-			"item": []
+			"item": [
+				{
+					"name": "Login - Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody = JSON.parse(responseBody);\r",
+									"var token = responseBody.token;\r",
+									"pm.environment.set(\"token\", token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"student.panji@school.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{main_url}}/users/login",
+							"host": [
+								"{{main_url}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STUDENT - Get Forum",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{forum_url}}/forum?courseId=fd87dcee-8430-4768-945d-a726da78dad7",
+							"host": [
+								"{{forum_url}}"
+							],
+							"path": [
+								"forum"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "fd87dcee-8430-4768-945d-a726da78dad7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Forum - Teacher",
-			"item": []
+			"item": [
+				{
+					"name": "Login - Teacher",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody = JSON.parse(responseBody);\r",
+									"\r",
+									"var token = responseBody.token;\r",
+									"\r",
+									"pm.environment.set(\"token\", token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sari.lukito@school.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{main_url}}/users/login",
+							"host": [
+								"{{main_url}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TEACHER - Add Forum",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Introduction to Spring Boot\",\r\n    \"description\": \"This forum covers the basics of Spring Boot framework.\",\r\n    \"effectiveDate\": \"2024-04-01T00:00:00Z\",\r\n    \"expiryDate\": \"2024-05-01T00:00:00Z\",\r\n    \"teacherId\": \"b18a43da-266e-4e7c-a755-218b5c0c64bd\", // Change To Selected Teacher\r\n    \"courseId\": \"b18a43da-266e-4e7c-a755-218b5c0c64bd\" // Change To Selected Course\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{forum_url}}/forum",
+							"host": [
+								"{{forum_url}}"
+							],
+							"path": [
+								"forum"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TEACHER - Get Forum",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{forum_url}}/forum?courseId=fd87dcee-8430-4768-945d-a726da78dad7",
+							"host": [
+								"{{forum_url}}"
+							],
+							"path": [
+								"forum"
+							],
+							"query": [
+								{
+									"key": "courseId",
+									"value": "fd87dcee-8430-4768-945d-a726da78dad7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
