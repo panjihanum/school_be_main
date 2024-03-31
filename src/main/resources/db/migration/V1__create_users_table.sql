@@ -7,6 +7,7 @@ CREATE TABLE users (
     last_name VARCHAR(255),
     email VARCHAR(255),
     birthdate DATE,
+    is_active boolean not null default true,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

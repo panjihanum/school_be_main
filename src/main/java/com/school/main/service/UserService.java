@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     public User save(User user) {
-        if (userRepo.existsByEmail(user.getEmail())) {
+         if (userRepo.existsByEmail(user.getEmail())) {
             throw new ResourceAlreadyExistsException("User", user.getEmail());
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -49,6 +49,7 @@ public class UserService implements UserDetailsService {
         }
 
         existingUser.setEmail(newUser.getEmail());
+        existingUser.setBirthdate(newUser.getBirthdate());
         if (!newUser.getPassword().isBlank()) {
             existingUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         }

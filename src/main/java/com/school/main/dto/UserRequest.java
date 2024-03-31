@@ -30,4 +30,6 @@ public class UserRequest {
 
     @NotEmpty(message = "{required.field}")
     private String password;
+
+    private String isActive;
 }

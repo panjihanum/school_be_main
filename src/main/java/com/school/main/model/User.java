@@ -41,6 +41,9 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    @Column(name = "is_active")
+    private Boolean isActive = true;
+
     public User(String firstName, String lastName, String username, String email, String password, String role) {
         this.username = username;
         this.firstName = firstName;

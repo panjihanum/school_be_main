@@ -5,6 +5,7 @@ CREATE TABLE courses (
     description TEXT,
     effective_date DATE NOT NULL,
     expiry_date DATE,
+    is_active boolean default true,
     CONSTRAINT fk_teacher_course FOREIGN KEY (teacher_id) REFERENCES users(id)
 );
 

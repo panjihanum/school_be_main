@@ -69,6 +69,16 @@ public class UserController {
         return ResponseEntity.created(URI.create(user.getId().toString())).body(resp);
     }
 
+    @PostMapping("/teacher")
+    @RolesAllowed("ADMIN")
+    public ResponseEntity<UserResponse> createUserTeacher(@RequestBody @Valid UserRequest request) {
+        var user = mapper.toModel(request);
+        user.setRole(RoleConstant.TEACHER.toString());
+        user = userService.save(user);
+        var resp = mapper.toResponse(user);
+        return ResponseEntity.created(URI.create(user.getId().toString())).body(resp);
+    }
+
     @GetMapping("/list-students")
     @RolesAllowed("ADMIN")
     public ResponseEntity<List<UserResponse>> getListStudents() {

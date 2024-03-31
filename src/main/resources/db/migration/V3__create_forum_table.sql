@@ -6,6 +6,7 @@ CREATE TABLE forums (
     description TEXT,
     effective_date DATE NOT NULL,
     expiry_date DATE,
+    is_active boolean default true,
     CONSTRAINT fk_teacher FOREIGN KEY (teacher_id) REFERENCES users(id),
     CONSTRAINT fk_course FOREIGN KEY (course_id) REFERENCES courses(id)
 );
@@ -16,6 +17,7 @@ CREATE TABLE comments (
     student_id UUID NOT NULL,
     comment_text TEXT NOT NULL,
     comment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_active boolean default true,
     CONSTRAINT fk_forum FOREIGN KEY (forum_id) REFERENCES forums(id),
     CONSTRAINT fk_student FOREIGN KEY (student_id) REFERENCES users(id)
 );
